@@ -298,16 +298,16 @@
 
   .task-item {
     display: flex; align-items: center; gap: 12px;
-    padding: 11px 14px; background: var(--surface);
-    border: 1px solid var(--border-light); border-radius: var(--radius);
+    padding: 11px 14px; background: #e4ddf0;
+    border: 1px solid #cec6db; border-radius: var(--radius);
     box-shadow: var(--shadow-sm); transition: all var(--transition);
     animation: taskIn 0.35s ease-out both;
   }
 
   @keyframes taskIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
 
-  .task-item:hover { border-color: var(--border); box-shadow: var(--shadow-md); }
-  .task-item.inactive { opacity: 0.38; }
+  .task-item:hover { border-color: #bfb6d0; box-shadow: var(--shadow-md); }
+  .task-item.inactive { opacity: 0.55; }
   .task-item.removing { animation: taskOut 0.3s ease-in forwards; }
   @keyframes taskOut { to { opacity: 0; transform: translateX(8px); height: 0; padding: 0 14px; margin: 0; } }
 
@@ -325,7 +325,7 @@
     border: solid #fff; border-width: 0 2px 2px 0;
     transform: rotate(45deg) translate(-1px, -1px);
   }
-  .checkbox.disabled { opacity: 0.3; cursor: not-allowed; }
+  .checkbox.disabled { border-color: #d4a0a0; background: rgba(200,120,120,0.12); cursor: not-allowed; opacity: 1; }
 
   .task-text {
     flex: 1; background: none; border: none;
