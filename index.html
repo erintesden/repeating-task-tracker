@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f5f0ea">
+<meta name="theme-color" content="#d9d2e8">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Ritual">
@@ -41,30 +41,30 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --bg: #f5f0ea;
-    --surface: #ffffff;
-    --surface-hover: #faf8f5;
-    --border: #e2dbd1;
-    --border-light: #ece7e0;
-    --text: #3a3530;
-    --text-muted: #8a8279;
-    --text-dim: #b5aea5;
-    --accent-anytime: #6a9a6e;
-    --accent-anytime-bg: rgba(106,154,110,0.08);
-    --accent-daily: #c4883a;
-    --accent-daily-bg: rgba(196,136,58,0.08);
-    --accent-weekly: #4a7fa8;
-    --accent-weekly-bg: rgba(74,127,168,0.08);
-    --accent-monthly: #9467a8;
-    --accent-monthly-bg: rgba(148,103,168,0.08);
-    --accent-yearly: #b8555e;
-    --accent-yearly-bg: rgba(184,85,94,0.08);
-    --check: #6a9a6e;
-    --danger: #b85c5c;
-    --danger-bg: rgba(184,92,92,0.06);
+    --bg: #d9d2e8;
+    --surface: #e4ddef;
+    --surface-hover: #dfd7ec;
+    --border: #bfb6d0;
+    --border-light: #cec6db;
+    --text: #28222f;
+    --text-muted: #5e5572;
+    --text-dim: #8d849e;
+    --accent-anytime: #7a6e9a;
+    --accent-anytime-bg: rgba(122,110,154,0.12);
+    --accent-daily: #8a6ab8;
+    --accent-daily-bg: rgba(138,106,184,0.12);
+    --accent-weekly: #6a7fb8;
+    --accent-weekly-bg: rgba(106,127,184,0.12);
+    --accent-monthly: #a867a0;
+    --accent-monthly-bg: rgba(168,103,160,0.12);
+    --accent-yearly: #b8617a;
+    --accent-yearly-bg: rgba(184,97,122,0.12);
+    --check: #7a6e9a;
+    --danger: #b85c7a;
+    --danger-bg: rgba(184,92,122,0.10);
     --radius: 10px;
-    --shadow-sm: 0 1px 3px rgba(58,53,48,0.04);
-    --shadow-md: 0 2px 8px rgba(58,53,48,0.06);
+    --shadow-sm: 0 1px 3px rgba(40,34,47,0.08);
+    --shadow-md: 0 2px 8px rgba(40,34,47,0.12);
     --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -84,6 +84,12 @@
     font-family: 'DM Serif Display', serif;
     font-size: 2.4rem; font-weight: 400;
     letter-spacing: -0.02em; color: var(--text); margin-bottom: 4px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .header-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    object-fit: cover; flex-shrink: 0;
   }
 
   header p { color: var(--text); font-size: 0.88rem; font-weight: 300; letter-spacing: 0.02em; }
@@ -212,7 +218,7 @@
   .day-chip:hover { border-color: var(--text-muted); color: var(--text-muted); }
   .day-chip.selected-daily { background: var(--accent-daily-bg); border-color: var(--accent-daily); color: var(--accent-daily); }
   .day-chip.selected-weekly { background: var(--accent-weekly-bg); border-color: var(--accent-weekly); color: var(--accent-weekly); }
-  .day-chip.in-range { background: rgba(74,127,168,0.04); border-color: rgba(74,127,168,0.3); color: var(--accent-weekly); }
+  .day-chip.in-range { background: rgba(106,127,184,0.04); border-color: rgba(106,127,184,0.3); color: var(--accent-weekly); }
 
   .schedule-note {
     font-size: 0.68rem; color: var(--text-dim);
@@ -338,11 +344,11 @@
     padding: 2px 7px; border-radius: 4px; flex-shrink: 0; user-select: none;
   }
 
-  .freq-badge.anytime { background: var(--accent-anytime-bg); color: var(--accent-anytime); border: 1px solid rgba(106,154,110,0.15); }
-  .freq-badge.daily { background: var(--accent-daily-bg); color: var(--accent-daily); border: 1px solid rgba(196,136,58,0.15); }
-  .freq-badge.weekly { background: var(--accent-weekly-bg); color: var(--accent-weekly); border: 1px solid rgba(74,127,168,0.15); }
-  .freq-badge.monthly { background: var(--accent-monthly-bg); color: var(--accent-monthly); border: 1px solid rgba(148,103,168,0.15); }
-  .freq-badge.yearly { background: var(--accent-yearly-bg); color: var(--accent-yearly); border: 1px solid rgba(184,85,94,0.15); }
+  .freq-badge.anytime { background: var(--accent-anytime-bg); color: var(--accent-anytime); border: 1px solid rgba(122,110,154,0.15); }
+  .freq-badge.daily { background: var(--accent-daily-bg); color: var(--accent-daily); border: 1px solid rgba(138,106,184,0.15); }
+  .freq-badge.weekly { background: var(--accent-weekly-bg); color: var(--accent-weekly); border: 1px solid rgba(106,127,184,0.15); }
+  .freq-badge.monthly { background: var(--accent-monthly-bg); color: var(--accent-monthly); border: 1px solid rgba(168,103,160,0.15); }
+  .freq-badge.yearly { background: var(--accent-yearly-bg); color: var(--accent-yearly); border: 1px solid rgba(184,97,122,0.15); }
 
   .schedule-hint { font-size: 0.58rem; color: var(--text-dim); white-space: nowrap; max-width: 110px; overflow: hidden; text-overflow: ellipsis; }
 
@@ -356,7 +362,7 @@
   .task-item:hover .delete-btn { color: var(--text-dim); }
   .delete-btn:hover { color: var(--danger) !important; background: var(--danger-bg); }
 
-  .task-item.anytime-done { background: rgba(106,154,110,0.04); }
+  .task-item.anytime-done { background: rgba(122,110,154,0.04); }
 
   .empty-state {
     text-align: center; padding: 60px 20px;
@@ -375,11 +381,27 @@
   @media (max-width: 520px) {
     .container { padding: 40px 16px 80px; }
     header h1 { font-size: 1.9rem; }
+    header p { font-size: 0.95rem; }
     .add-row { flex-wrap: wrap; }
-    .add-row input[type="text"] { min-width: 100%; }
-    .day-chip { width: 34px; height: 28px; font-size: 0.6rem; }
+    .add-row input[type="text"] { min-width: 100%; font-size: 1rem; }
+    .task-text { font-size: 1rem; }
+    .freq-badge { font-size: 0.65rem; }
+    .schedule-hint { font-size: 0.65rem; }
+    .freq-toggle button { font-size: 0.72rem; padding: 10px 6px; }
+    .submit-btn { font-size: 0.92rem; padding: 12px; }
+    .day-chip { width: 38px; height: 32px; font-size: 0.68rem; }
     .task-meta { flex-direction: column; align-items: flex-end; gap: 2px; }
-    .reset-info { font-size: 0.65rem; padding: 5px 10px; }
+    .reset-info { font-size: 0.72rem; padding: 6px 12px; }
+    .section-title { font-size: 0.75rem; }
+    .section-count { font-size: 0.68rem; }
+    .schedule-label { font-size: 0.75rem; }
+    .schedule-note { font-size: 0.75rem; }
+    .month-range label, .yearly-date label { font-size: 0.82rem; }
+    .panel-title { font-size: 0.78rem; }
+    .add-task-toggle { font-size: 0.9rem; }
+    .progress-label { font-size: 0.78rem; }
+    .progress-count { font-size: 0.85rem; }
+    .header-icon { width: 36px; height: 36px; }
   }
 </style>
 </head>
@@ -387,7 +409,7 @@
 
 <div class="container">
   <header>
-    <h1>Ritual</h1>
+    <h1><img src="./mascot.png" alt="Ritual" class="header-icon">Ritual</h1>
     <p>Repeating tasks that keep you on track.</p>
     <div class="reset-info">
       <span class="dot"></span>
@@ -467,7 +489,7 @@
 </div>
 
 <script>
-const STORAGE_KEY = 'ritual_v5_tasks';
+const STORAGE_KEY = 'ritual_v6_tasks';
 const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const DAY_SHORT = ['Su','Mo','Tu','We','Th','Fr','Sa'];
 const DAY_ORDER = [1,2,3,4,5,6,0];
@@ -482,7 +504,7 @@ let weeklyRangeStart = null;
 let weeklyRangeEnd = null;
 
 // Collapsed state
-const COLLAPSE_KEY = 'ritual_v5_collapsed';
+const COLLAPSE_KEY = 'ritual_v6_collapsed';
 let collapsedSections = {};
 
 function loadCollapsed() { try { const r = localStorage.getItem(COLLAPSE_KEY); if (r) collapsedSections = JSON.parse(r); } catch(e) { collapsedSections = {}; } }
