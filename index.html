@@ -6,10 +6,10 @@
 <meta name="theme-color" content="#d9d2e8">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Ritual">
+<meta name="apple-mobile-web-app-title" content="Ritual Loop">
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icon-192.png">
-<title>Ritual — Repeating Task Tracker</title>
+<title>Ritual Loop — Repeating Task Tracker</title>
 <style>
   /* Local fonts — no external dependency */
   @font-face {
@@ -437,7 +437,7 @@
 
 <div class="container">
   <header>
-    <h1><img src="./mascot.png" alt="Ritual" class="header-icon">Ritual</h1>
+    <h1><img src="./mascot.png" alt="Ritual Loop" class="header-icon">Ritual Loop</h1>
     <p>Repeating tasks that keep you on track.</p>
     <div class="reset-info">
       <span class="dot"></span>
@@ -524,7 +524,7 @@
 </div>
 
 <script>
-const STORAGE_KEY = 'ritual_v6_tasks';
+const STORAGE_KEY = 'ritual_loop_tasks';
 const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const DAY_SHORT = ['Su','Mo','Tu','We','Th','Fr','Sa'];
 const DAY_ORDER = [1,2,3,4,5,6,0];
@@ -539,7 +539,7 @@ let weeklyRangeStart = null;
 let weeklyRangeEnd = null;
 
 // Collapsed state
-const COLLAPSE_KEY = 'ritual_v6_collapsed';
+const COLLAPSE_KEY = 'ritual_loop_collapsed';
 let collapsedSections = {};
 
 function loadCollapsed() { try { const r = localStorage.getItem(COLLAPSE_KEY); if (r) collapsedSections = JSON.parse(r); } catch(e) { collapsedSections = {}; } }
@@ -564,7 +564,7 @@ function exportTasks() {
   const a = document.createElement('a');
   a.href = url;
   const d = new Date();
-  a.download = `ritual-tasks-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}.json`;
+  a.download = `ritual-loop-tasks-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}.json`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
