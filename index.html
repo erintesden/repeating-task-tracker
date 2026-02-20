@@ -378,6 +378,34 @@
   .progress-bar { height: 3px; background: var(--border-light); border-radius: 3px; overflow: hidden; }
   .progress-fill { height: 100%; background: var(--check); border-radius: 3px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
 
+  /* ====== IMPORT/EXPORT ====== */
+  .io-bar {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 20px; animation: fadeUp 0.6s ease-out 0.08s both;
+  }
+
+  .io-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 6px 12px; background: var(--surface);
+    border: 1px solid var(--border-light); border-radius: 8px;
+    font-family: inherit; font-size: 0.68rem; font-weight: 500;
+    color: var(--text-muted); cursor: pointer;
+    transition: all var(--transition); letter-spacing: 0.02em;
+  }
+
+  .io-btn:hover { border-color: var(--border); color: var(--text); box-shadow: var(--shadow-sm); }
+  .io-btn .io-icon { font-size: 0.78rem; }
+
+  .io-msg {
+    font-size: 0.66rem; color: var(--check); font-weight: 500;
+    opacity: 0; transition: opacity 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .io-msg.show { opacity: 1; }
+
+  .io-file { display: none; }
+
   @media (max-width: 520px) {
     .container { padding: 40px 16px 80px; }
     header h1 { font-size: 1.9rem; }
@@ -416,6 +444,13 @@
       <span id="resetInfoText">Loading...</span>
     </div>
   </header>
+
+  <div class="io-bar">
+    <button class="io-btn" onclick="exportTasks()"><span class="io-icon">&#8681;</span> Export</button>
+    <button class="io-btn" onclick="document.getElementById('importFile').click()"><span class="io-icon">&#8679;</span> Import</button>
+    <input type="file" id="importFile" class="io-file" accept=".json" onchange="importTasks(event)" />
+    <span class="io-msg" id="ioMsg"></span>
+  </div>
 
   <div class="progress-wrap" id="progressWrap" style="display:none;">
     <div class="progress-header">
@@ -512,6 +547,55 @@ function saveCollapsed() { localStorage.setItem(COLLAPSE_KEY, JSON.stringify(col
 
 function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks)); }
 function load() { try { const r = localStorage.getItem(STORAGE_KEY); if (r) tasks = JSON.parse(r); } catch(e) { tasks = []; } }
+
+// Import / Export
+function showIoMsg(text) {
+  const el = document.getElementById('ioMsg');
+  el.textContent = text;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2600);
+}
+
+function exportTasks() {
+  if (!tasks.length) { showIoMsg('No tasks to export'); return; }
+  const data = JSON.stringify(tasks, null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const d = new Date();
+  a.download = `ritual-tasks-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showIoMsg('Tasks exported');
+}
+
+function importTasks(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (!Array.isArray(imported)) { showIoMsg('Invalid file: expected an array'); return; }
+      // Validate each task has at minimum a text and freq
+      const valid = imported.every(t => t && typeof t.text === 'string' && typeof t.freq === 'string');
+      if (!valid) { showIoMsg('Invalid task data'); return; }
+      tasks = imported;
+      save();
+      checkResets();
+      render();
+      showIoMsg(`Imported ${imported.length} task${imported.length !== 1 ? 's' : ''}`);
+    } catch(err) {
+      showIoMsg('Failed to parse file');
+    }
+  };
+  reader.readAsText(file);
+  // Reset input so the same file can be re-imported
+  event.target.value = '';
+}
 
 // Date helpers
 function getToday() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
